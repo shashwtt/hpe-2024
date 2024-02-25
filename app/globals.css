@@ -6,6 +6,10 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+
+  --font-satoshi: 'Satoshi', sans-serif;
+  --font-magh: 'Maghfirea';
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,4 +28,18 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+
+
+/* Typefaces */
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.ttf') format('truetype-variations');
+}
+
+@font-face {
+  font-family: 'Maghfirea';
+  src: url('/fonts/Maghfirea.ttf') format('woff2');
 }

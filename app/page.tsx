@@ -1,113 +1,113 @@
-import Image from 'next/image'
+"use client";
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+import { useEffect, useState, useRef } from "react";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import gsap from "gsap";
+import Header from "@/components/Header";
+import DarkmodeSwitch from "@/components/DarkmodeSwitch";
+import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
+import SplitType from "split-type";
+import { Bounce } from "gsap";
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+export default function Page() {
+	const blobRef = useRef<HTMLDivElement>(null);
+	const testRef = useRef<HTMLDivElement>(null);
+	const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b;
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+	useEffect(() => {
+		gsap.registerPlugin(ScrollTrigger);
+		window.onmousemove = (e) => {
+			const blobrect = blobRef.current?.getBoundingClientRect();
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+			const prevX = blobRef.current?.style.getPropertyValue("--blob-x");
+			const prevY = blobRef.current?.style.getPropertyValue("--blob-y");
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
+			const nextX = lerp(
+				parseInt(prevX || "0"),
+				e.pageX - (blobrect?.left || 0),
+				0.05
+			);
+			const nextY = lerp(
+				parseInt(prevY || "0"),
+				e.pageY - (blobrect?.top || 0),
+				0.05
+			);
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+			blobRef.current?.style.setProperty("--blob-x", `${nextX}px`);
+			blobRef.current?.style.setProperty("--blob-y", `${nextY}px`);
+		};
+
+		new SplitType(".textAnim", { types: ["chars", "words"] }).chars?.forEach((char) => {
+			gsap.set(char, {
+				display: "inline-block",
+				color: "#404040",
+				overflow: "visible",
+			});
+		});
+		gsap.fromTo(
+			".textAnim .char",
+			{
+				scaleX: 0.8,
+				scaleY: 0.2,
+				rotateY: -15,
+				rotateX: -15,
+				opacity: 0,
+				x: 10,
+				y: 20,
+			},
+			{
+				scale: 1,
+				stagger: 0.04,
+				duration: .4,
+				rotateX: 0,
+				rotateY: 0,
+				y: 0,
+				x: 0,
+				opacity:1,
+				ease: "power2.out",
+				onComplete: () => {
+					gsap.set(".textAnim .char", {
+						display: "inline",
+						color: "transparent",
+						overflow: "visible"
+					});
+				}
+			}
+		);
+	}, []);
+
+	useEffect(() => {
+		
+	});
+
+	return (
+		<ReactLenis
+			root
+			options={{
+				lerp: 0.1,
+			}}>
+			<div className="bg-light dark:bg-black text-dark dark:text-light select-none relative font-satoshi w-screen min-h-screen">
+				{/* <div className="w-full h-full fixed z-[3]">
+					<div></div>
+				</div> */}
+				{/* FIXED ELEMENTS */}
+				<div className="relative z-[5]">
+					<Header />
+					<DarkmodeSwitch />
+				</div>
+				<div
+					className="w-screen min-h-screen flex items-center justify-center"
+					ref={testRef}>
+					<div
+						ref={blobRef}
+						className="textAnim text-[5rem] leading-none relative to-neutral-700 from-orange-400/90 bg-neutral-700 bg-clip-text font-magh max-w-6xl text-center bg-[radial-gradient(20rem_at_var(--blob-x)_var(--blob-y),_var(--tw-gradient-stops))] ">
+							Introducing — DartXT. <br />  Ensuring access to affordable, reliable, sustainable and modern energy for all
+
+					</div>
+				</div>
+			</div>
+		</ReactLenis>
+	);
 }
+
+// to-neutral-700 from-yellow-600
