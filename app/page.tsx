@@ -39,8 +39,9 @@ export default function Page() {
 			(char) => {
 				gsap.set(char, {
 					display: "inline-block",
-					color: "#404040",
+					color: "#CB984B",
 					overflow: "visible",
+					padding: "0 0.001em",
 				});
 			}
 		);
@@ -48,7 +49,7 @@ export default function Page() {
 			".textAnim .char",
 			{
 				scaleX: 0.8,
-				scaleY: 0.2,
+				scaleY: 0.6,
 				rotateY: -15,
 				rotateX: -15,
 				opacity: 0,
@@ -59,9 +60,8 @@ export default function Page() {
 				scale: 1,
 				stagger: {
 					amount: 2,
-					from: "random",
 				},
-				duration: 0.8,
+				duration: 0.6,
 				rotateX: 0,
 				rotateY: 0,
 				y: 0,
@@ -90,15 +90,15 @@ export default function Page() {
 			<div className="bg-light dark:bg-black text-dark dark:text-light select-none relative font-satoshi w-screen min-h-screen">
 				<div className="w-screen h-screen fixed flex p-1 items-center justify-center">
 					{/* <div className="w-full h-full rounded-xl border overflow-hidden border-light bg-cover bg-[url(https://media.discordapp.net/attachments/1005134417620127776/1211652135100612638/image.png?ex=65eef9fc&is=65dc84fc&hm=a9c99a29edca184146947686dc2bbf05b558e464b9d0937a459b35d737970033&=&format=webp&quality=lossless&width=396&height=198)] z-30 opacity-100"></div> */}
-					<div className="w-full bg-white h-full rounded-xl border overflow-hidden border-light z-30 opacity-100">
-						{/* <video
+					<div className="w-full h-full rounded-xl border overflow-hidden border-light z-30 opacity-10">
+						<video
 							autoPlay
 							loop
 							muted
 							ref={videoRef}
 							className="w-full h-full object-cover">
 							<source src="/media/hero.mp4" type="video/mp4" />
-						</video> */}
+						</video>
 					</div>
 				</div>
 				{/* <div className="w-full h-full fixed z-[3]">
@@ -107,14 +107,14 @@ export default function Page() {
 				{/* FIXED ELEMENTS */}
 				<div className="relative z-[5]">
 					<Header />
-					<DarkmodeSwitch />
+					{/* <DarkmodeSwitch /> */}
 				</div>
 				<div
-					className="w-screen min-h-screen flex items-center justify-center"
+					className="w-screen min-h-screen flex items-end pb-10 pl-10"
 					ref={testRef}>
 					<div
 						ref={blobRef}
-						className="textAnim text-[5.1rem] leading-[1.1] relative bg-black bg-clip-text bg-fixed font-magh max-w-6xl text-center to-black from-black dark:to-yellow-200 opacity-80 dark:from-orange-500 bg-gradient-to-tl bag-[radial-gradient(30rem_at_var(--blob-x)_var(--blob-y),_var(--tw-gradient-stops))] ">
+						className="textAnim text-[5.1rem] leading-[1.1] relative bg-orange-400 bg-clip-text bg-fixed font-magh max-w-6xl to-black from-black dark:to-yellow-200 opacity-80 dark:from-orange-500 bg-gradient-to-tl bag-[radial-gradient(30rem_at_var(--blob-x)_var(--blob-y),_var(--tw-gradient-stops))] ">
 						Introducing — DartXT. <br /> Ensuring access to affordable,
 						reliable, sustainable and modern energy for all
 					</div>

@@ -22,7 +22,7 @@ export default function Header() {
 							onClick={() => {
 								setIsPaused(!isPaused);
 							}}
-							className="rounded-full cursor-pointer hover:outline outline-1 outline-dark/10 dark:outline-light/10 outline-offset-2 w-20 border h-9 border-black/30 dark:border-light/40">
+							className="rounded-full cursor-pointer outline duration-300 outline-transparent hover:outline-dark/10 hover:dark:outline-light/20 outline-offset-2 w-20 border h-9 border-black/30 dark:border-light/40">
 							<MuteBtn />
 						</div>
 					</div>
