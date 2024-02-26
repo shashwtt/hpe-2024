@@ -3,6 +3,8 @@ export default function DarkmodeSwitch() {
         document.documentElement.classList.add("class");
     }
 	return (
-		<div onClick={setTWdark} className="w-10 aspect-square border bg-black/10 border-dark/60 cursor-pointer fixed bottom-6 rounded-xl left-8"></div>
+		<div onClick={setTWdark} className="w-auto px-4 py-1 border bg-light/5 border-dark/60 cursor-pointer fixed bottom-6 rounded-xl left-8">
+            scroll further down &nbsp;↓
+        </div>
 	);
 }

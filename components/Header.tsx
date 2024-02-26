@@ -7,8 +7,8 @@ export default function Header() {
 
 	return (
 		<div className="fixed w-screen h-16">
-			<div className="w-full px-6 h-full mx-auto text-orange-300/80">
-				<div className="flex mx-auto w-full px-4 border-b border-black/10 dark:border-orange-200/20  items-center justify-between h-full">
+			<div className="w-full px-6 h-full mx-auto text-dark dark:text-light">
+				<div className="flex mx-auto w-full px-4 border-2b border-black/10 dark:border-orange-200/20  items-center justify-between h-full">
 					<div className="flex items-center">
 						<a href="/" className="text-xl scale-110">
 							Hackathon.

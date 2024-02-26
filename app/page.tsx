@@ -12,6 +12,8 @@ import { Bounce } from "gsap";
 export default function Page() {
 	const blobRef = useRef<HTMLDivElement>(null);
 	const testRef = useRef<HTMLDivElement>(null);
+	const videoRef = useRef<HTMLVideoElement>(null);
+
 	const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b;
 
 	useEffect(() => {
@@ -22,28 +24,26 @@ export default function Page() {
 			const prevX = blobRef.current?.style.getPropertyValue("--blob-x");
 			const prevY = blobRef.current?.style.getPropertyValue("--blob-y");
 
-			const nextX = lerp(
-				parseInt(prevX || "0"),
-				e.pageX - (blobrect?.left || 0),
-				0.05
-			);
-			const nextY = lerp(
-				parseInt(prevY || "0"),
-				e.pageY - (blobrect?.top || 0),
-				0.05
-			);
+			const nextX = lerp(parseInt(prevX || "0"), e.clientX, 0.08);
+			const nextY = lerp(parseInt(prevY || "0"), e.clientY, 0.08);
 
 			blobRef.current?.style.setProperty("--blob-x", `${nextX}px`);
 			blobRef.current?.style.setProperty("--blob-y", `${nextY}px`);
 		};
 
-		new SplitType(".textAnim", { types: ["chars", "words"] }).chars?.forEach((char) => {
-			gsap.set(char, {
-				display: "inline-block",
-				color: "#404040",
-				overflow: "visible",
-			});
-		});
+		if (videoRef.current) {
+			// videoRef.current.playbackRate = 0;
+		}
+
+		new SplitType(".textAnim", { types: ["chars", "words"] }).chars?.forEach(
+			(char) => {
+				gsap.set(char, {
+					display: "inline-block",
+					color: "#404040",
+					overflow: "visible",
+				});
+			}
+		);
 		gsap.fromTo(
 			".textAnim .char",
 			{
@@ -57,28 +57,29 @@ export default function Page() {
 			},
 			{
 				scale: 1,
-				stagger: 0.04,
-				duration: .4,
+				stagger: {
+					amount: 2,
+					from: "random",
+				},
+				duration: 0.8,
 				rotateX: 0,
 				rotateY: 0,
 				y: 0,
 				x: 0,
-				opacity:1,
+				opacity: 1,
 				ease: "power2.out",
 				onComplete: () => {
 					gsap.set(".textAnim .char", {
 						display: "inline",
 						color: "transparent",
-						overflow: "visible"
+						overflow: "visible",
 					});
-				}
+				},
 			}
 		);
 	}, []);
 
-	useEffect(() => {
-		
-	});
+	useEffect(() => {});
 
 	return (
 		<ReactLenis
@@ -87,6 +88,19 @@ export default function Page() {
 				lerp: 0.1,
 			}}>
 			<div className="bg-light dark:bg-black text-dark dark:text-light select-none relative font-satoshi w-screen min-h-screen">
+				<div className="w-screen h-screen fixed flex p-1 items-center justify-center">
+					{/* <div className="w-full h-full rounded-xl border overflow-hidden border-light bg-cover bg-[url(https://media.discordapp.net/attachments/1005134417620127776/1211652135100612638/image.png?ex=65eef9fc&is=65dc84fc&hm=a9c99a29edca184146947686dc2bbf05b558e464b9d0937a459b35d737970033&=&format=webp&quality=lossless&width=396&height=198)] z-30 opacity-100"></div> */}
+					<div className="w-full bg-white h-full rounded-xl border overflow-hidden border-light z-30 opacity-100">
+						{/* <video
+							autoPlay
+							loop
+							muted
+							ref={videoRef}
+							className="w-full h-full object-cover">
+							<source src="/media/hero.mp4" type="video/mp4" />
+						</video> */}
+					</div>
+				</div>
 				{/* <div className="w-full h-full fixed z-[3]">
 					<div></div>
 				</div> */}
@@ -100,9 +114,9 @@ export default function Page() {
 					ref={testRef}>
 					<div
 						ref={blobRef}
-						className="textAnim text-[5rem] leading-none relative to-neutral-700 from-orange-400/90 bg-neutral-700 bg-clip-text font-magh max-w-6xl text-center bg-[radial-gradient(20rem_at_var(--blob-x)_var(--blob-y),_var(--tw-gradient-stops))] ">
-							Introducing — DartXT. <br />  Ensuring access to affordable, reliable, sustainable and modern energy for all
-
+						className="textAnim text-[5.1rem] leading-[1.1] relative bg-black bg-clip-text bg-fixed font-magh max-w-6xl text-center to-black from-black dark:to-yellow-200 opacity-80 dark:from-orange-500 bg-gradient-to-tl bag-[radial-gradient(30rem_at_var(--blob-x)_var(--blob-y),_var(--tw-gradient-stops))] ">
+						Introducing — DartXT. <br /> Ensuring access to affordable,
+						reliable, sustainable and modern energy for all
 					</div>
 				</div>
 			</div>
