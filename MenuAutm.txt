@@ -1,0 +1,85 @@
+  .menuClickPop
+{
+  height: 98vh;
+  margin: 1vh 0 0 0;
+  width: 38vw;
+  background-color: #0A0B0C;
+  border-radius: 20px 0 0 20px;
+}
+.holderMenuClick
+{
+   height: 100vh;
+   width: 100vw;
+   display: flex;
+   justify-content: right;
+   align-items: right;
+   position: fixed;
+  z-index: 1000000;
+
+}
+.menuClickPop
+{
+  display: flex;
+  flex-direction: column;
+  padding: 15vh 0 0 2vw;
+  transform: translateX(100%);
+}
+.menuClickPop a
+{
+   font-family: 'Helvetica';
+   font-size: 80px;
+   color: #dbdbdb;
+   text-transform: uppercase;
+   font-weight: bold;
+}
+.menuClickPop p
+{
+  font-family: 'Helvetica';
+   font-size: 18px;
+   color: #dbdbdb;
+   font-weight: 400;
+   padding: 10vh 15vw 0 0;
+}
+.closeMenu 
+{
+  position: absolute;
+  margin: 3vh 2vw 0 0;
+  transform: translateX(100vw);
+
+}
+
+.closeMenu a
+{
+  font-size: 15px;
+  background-color: #dbdbdb;
+  color: #1f1f1f;
+  padding: 0.5vh 1.5vw;
+  border-radius: 20px;
+  cursor: pointer;
+
+}
+
+
+
+
+<div class="holderMenuClick">
+        <div class="closeMenu">
+          <a id="closeMenu">Close</a>
+        </div>
+        <div class="menuClickPop">
+          <a>Home</a>
+          <a>Projects</a>
+          <a>About</a>
+          <p>Our goal is to deliver amazing experiences that make people talk,
+            and build strategic value for brands, tech, entertainment, arts &
+            culture.
+          <br><br>
+
+         <b> autm.studio@gmail.com</b>
+         <br>
+         <br>
+         +91 &nbsp;8007617426
+          
+          </p>
+        </div>
+       </div>

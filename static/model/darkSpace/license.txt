@@ -1,0 +1,11 @@
+Model Information:
+* title:	Dark Mystery Effect
+* source:	https://sketchfab.com/3d-models/dark-mystery-effect-57ec536354a143c5af4aab07370dbf71
+* author:	tamminen (https://sketchfab.com/tamminen)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Dark Mystery Effect" (https://sketchfab.com/3d-models/dark-mystery-effect-57ec536354a143c5af4aab07370dbf71) by tamminen (https://sketchfab.com/tamminen) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
