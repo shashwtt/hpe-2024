@@ -14,8 +14,8 @@ tsconfig.json
 tsconfig.*.json
 
 # Compiled JavaScript files
-*.js
-*.js.map
+# *.js
+# *.js.map
 
 # Vite cache and temporary files
 .vite/
@@ -40,3 +40,4 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.vercel
