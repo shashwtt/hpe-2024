@@ -71,11 +71,12 @@ gltfLoader.setDRACOLoader(dracoLoader);
 
 let mixer = null;
 
-gltfLoader.load("/model/the_young_mother_earth/scene.gltf", (gltf) => {
+gltfLoader.load("/model/earth/scene.gltf", (gltf) => {
 	model = gltf.scene;
-	model.scale.set(42.0, 42.0, 42.0);
-	model.position.set(-3.8, -14, 2);
-	model.rotation.set(0.01, 0.4, -0.03);
+	const scale = 0.003;
+	model.scale.set(scale, scale, scale);
+	model.position.set(-4, 2, -0.5);
+	model.rotation.y = 0.2;
 
 	scene.add(model);
 
@@ -97,23 +98,20 @@ gltfLoader.load("/model/the_young_mother_earth/scene.gltf", (gltf) => {
 		},
 	});
 
-	modelMove.to(model.position, { z: -4, duration: 1 }, "runSame2");
-	modelMove.to(model.rotation, { y: -0.5, duration: 1 }, "runSame2");
-	modelMove.to(model.position, { x: -2, duration: 1 }, "runSame2");
-	modelMove.to(model.position, { x: 1.1, duration: 1 }, "runSame");
-	modelMove.to(model.rotation, { y: -5, duration: 1 }, "runSame");
-	modelMove.to(model.rotation, { y: -7, duration: 1 });
+	modelMove.to(model.position, { z: -4, duration: 1 }, "runSame2",);
+	modelMove.to(model.position, { x: 4, duration: 1 }, "runSame2",);
+	modelMove.to(model.rotation, { y: 5, duration: 3 }, 0);
+	modelMove.to(model.position, { x: -2, duration: 1 });
+	modelMove.to(model.position, { x: 1.1, duration: 1 });
 	modelMove.to(model.position, { z: 1.2, duration: 1 });
 });
 
 // FFFEE0 - Soft yellow color
-const ambientLight = new THREE.AmbientLight(0xFFFEE0, 5);
+const ambientLight = new THREE.AmbientLight(0xFFFEE0, 1);
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xFFFEE0, 1);
-directionalLight.shadow.mapSize.set(10, 10);
-
-directionalLight.position.set(5, 5, 5);
+const directionalLight = new THREE.DirectionalLight(0xFFFEE0, 6);
+directionalLight.position.set(5, 10, 7);
 scene.add(directionalLight);
 
 /* Sizes*/
@@ -130,7 +128,7 @@ window.addEventListener("resize", () => {
 	// Update camera
 	camera.aspect = sizes.width / sizes.height;
 	camera.updateProjectionMatrix();
-
+	
 	// Update renderer
 	renderer.setSize(sizes.width, sizes.height);
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -139,12 +137,12 @@ window.addEventListener("resize", () => {
 // Base camera
 
 const camera = new THREE.PerspectiveCamera(
-	75,
+	70,
 	sizes.width / sizes.height,
 	0.1,
-	100
+	1000
 );
-camera.position.set(0, 2, 5);
+camera.position.set(0, 2, 3);
 
 scene.add(camera);
 
@@ -217,6 +215,78 @@ const tick = () => {
 
 tick();
 
+/*=====================================EFFECTS PAGE=================================== */
+
+let sections = gsap.utils.toArray(".horizontalScrollDiv");
+
+let scrollTween = gsap.to(sections, {
+    xPercent: -100 * (sections.length - 1),
+    ease: "none", // <-- IMPORTANT!
+    scrollTrigger: {
+      trigger: ".effectsPageContainer",
+      pin: true,
+      scrub: 0.5,
+      // markers: true,
+      //snap: directionalSnap(1 / (sections.length - 1)),
+      end: "+=3000"
+    }
+  });
+
+
+  let thingsMove1 = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".effectPageFirst",
+      start: "top top",
+      end: "250% top",
+      scrub: 1,
+    //   markers:true,
+    },
+  });
+  
+  thingsMove1
+    // .to(".octMove1", { x: "-10vw",y:"-10vh", rotation:-30, duration: 1 },'runOct')
+    .to(".octMove1", { x: "-45vw",y:"-20vh", duration: 1 })
+
+
+
+
+      let thingsMove3 = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".effectPageThird",
+          start: "300% top",
+          end: "450% top",
+          scrub: 1,
+        //   markers:true,
+        },
+      });
+      
+      thingsMove3
+        .to(".octMove3", { x:"-40vh", duration: 1 }) 
+
+
+        let colorChange = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".effectPageFirst",
+            start: "top top",
+            end: "400% top",
+            scrub: 1,
+            // markers:true,
+          },
+        });
+        
+        colorChange 
+          .to(".effectsPageContainer", { background:'#004d80', duration:2}) 
+          .to(".effectsPageContainer", { background:'#2aa22a', duration: 2 }) 
+          .to(".effectsPageContainer", { background:'#990000', duration: 2 }) 
+          .to(".effectsPageContainer", { background:'#86592d', duration: 2 }) 
+    
+
+
+
+
+
+
+
 const moveSections = gsap.timeline({
 	scrollTrigger: {
 		trigger: ".container",
@@ -243,6 +313,7 @@ moveSections.to(
   {
     scale: 0,
     duration: 5,
+	
   },
   "run2"
 );
@@ -443,18 +514,18 @@ tl.to(
 );
 
 
-let questionMove = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".aboutUsSection",
-    start: "top top",
-    end: "100% bottom",
-    scrub: 1,
-  },
-});
+// let questionMove = gsap.timeline({
+//   scrollTrigger: {
+//     trigger: ".aboutUsSection",
+//     start: "top top",
+//     end: "100% bottom",
+//     scrub: 1,
+//   },
+// });
 
-questionMove
-  .to(".showFirstWhatWeDo", {opacity:1, duration:1 })
-  .to(".showSecondWhatWeDo", {opacity:1, duration:1 })
-  .to(".showThirdWhatWeDo", {opacity:1, delay:1, duration:1 })
+// questionMove
+//   .to(".showFirstWhatWeDo", {opacity:1, duration:1 })
+//   .to(".showSecondWhatWeDo", {opacity:1, duration:1 })
+//   .to(".showThirdWhatWeDo", {opacity:1, delay:1, duration:1 })
 
-
+	  
