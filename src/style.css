@@ -20,8 +20,8 @@ body::-webkit-scrollbar {
 
 body {
 	overflow-x: hidden;
-	background: linear-gradient(#324669 0%, #113574 100%);
 	font-family: "Helvetica";
+  background-color: #243f6e;
 }
 
 .navBar {
